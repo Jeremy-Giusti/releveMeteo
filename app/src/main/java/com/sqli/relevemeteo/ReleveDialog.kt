@@ -37,7 +37,7 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ReleveEditionViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(ReleveEditionViewModel::class.java)
         bindEditTexts()
         initSpinner()
         initConfirmButton()
