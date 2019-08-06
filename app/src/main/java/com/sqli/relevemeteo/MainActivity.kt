@@ -21,7 +21,7 @@ open class MainActivity : AppCompatActivity() {
 
         meteo_recycler_view.run {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = MeteoAdapter(meteoList)
+            adapter = MeteoAdapter(meteoList, ::onMeteoClick)
         }
     }
 
@@ -32,9 +32,23 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addMeteoReleve(releve : ReleveMeteo){
+    fun addMeteoReleve(releve: ReleveMeteo) {
         meteoList.add(releve)
         meteo_recycler_view.adapter?.notifyDataSetChanged()
+    }
+
+    fun removeMeteoReleve(meteo: Meteo) {
+        meteoList.remove(meteo)
+        meteo_recycler_view.adapter?.notifyDataSetChanged()
+    }
+
+    fun onMeteoClick(meteo: Meteo) {
+        android.app.AlertDialog.Builder(this)
+            .setMessage("Confirmer la suppression de la meteo")
+            .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                removeMeteoReleve(meteo)
+                dialog.dismiss()
+            }.show()
     }
 
 }
