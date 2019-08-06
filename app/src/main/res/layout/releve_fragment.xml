@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/releve_dialog_root_view"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:padding="64dp"
+              android:layout_height="match_parent">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/releve_date"/>
+    <EditText
+            android:id="@+id/releve_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="05/07/19"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/temperature"/>
+
+    <EditText
+            android:id="@+id/releve_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="31°C"/>
+    <Spinner
+            android:id="@+id/releve_ensoleillement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/meteo_date"/>
+    <EditText
+            android:id="@+id/meteo_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="05/07/19"/>
+
+    <Button
+            android:id="@+id/validate_releve_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/validate"
+    />
+
+</LinearLayout>
