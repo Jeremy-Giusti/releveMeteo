@@ -30,7 +30,7 @@ class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Me
         ) {
             itemView.run {
                 meteo_date.text = "${meteo.temperature}°C"
-                meteo_temperature.text = "Date : ${meteo.date}"
+                meteo_temperature.text = "Date : ${meteo.date.asDisplayableString()}"
                 meteo_ensoleillement.text = meteo.ensoleillement.toString()
                 setOnLongClickListener{
                     itemClickCallback(meteo)

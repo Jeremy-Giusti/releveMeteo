@@ -6,11 +6,11 @@ import kotlin.collections.ArrayList
 fun getMeteoList(): List<Meteo> {
     return ArrayList<Meteo>().apply {
         add(Meteo(31, Date(), Ensoleillement.Soleil))
-        add(Meteo(21, Date(), Ensoleillement.Pluit))
-        add(Meteo(3, Date(), Ensoleillement.Soleil))
-        add(Meteo(14, Date(), Ensoleillement.Nuageux))
-        add(Meteo(13, Date(), Ensoleillement.Orage))
-        add(Meteo(19, Date(), Ensoleillement.Pluit))
-        add(Meteo(0, Date(), Ensoleillement.Nuageux))
+        add(Meteo(21, Date(1546764811000), Ensoleillement.Pluit))
+        add(Meteo(3, Date(1544086411000), Ensoleillement.Soleil))
+        add(Meteo(14, Date(1583484811000), Ensoleillement.Nuageux))
+        add(Meteo(13, Date(1559811211000), Ensoleillement.Orage))
+        add(Meteo(19, Date(1568451211000), Ensoleillement.Pluit))
+        add(Meteo(0, Date(1558515211000), Ensoleillement.Nuageux))
     }
 }
