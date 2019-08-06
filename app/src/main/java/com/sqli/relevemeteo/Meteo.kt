@@ -13,7 +13,7 @@ enum class Ensoleillement {
     NUAGEUX
 }
 
-enum class MeteoFields{
+enum class MeteoField{
     TEMPERATURE,
     DATE,
     ENSOLEILLEMENT

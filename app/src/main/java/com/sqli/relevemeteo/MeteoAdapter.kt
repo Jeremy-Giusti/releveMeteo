@@ -1,13 +1,13 @@
 package com.sqli.relevemeteo
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.meteo_item.view.*
 
 class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Meteo) -> Unit) :
-    RecyclerView.Adapter<MeteoAdapter.ViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<MeteoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.meteo_item, parent, false)
@@ -21,7 +21,7 @@ class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Me
         meteoList[position].let { meteo -> holder.bind(meteo, itemClickCallback) }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         fun bind(
             meteo: Meteo,
             itemClickCallback: (meteo: Meteo) -> Unit

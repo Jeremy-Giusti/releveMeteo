@@ -1,7 +1,11 @@
 package com.sqli.relevemeteo.viewModel
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.sqli.relevemeteo.Meteo
+import com.sqli.relevemeteo.MeteoFactory
+import com.sqli.relevemeteo.ReleveDialog
 import com.sqli.relevemeteo.ReleveMeteo
 
 class ReleveEditionViewModel : ViewModel() {
@@ -10,9 +14,19 @@ class ReleveEditionViewModel : ViewModel() {
      */
     private var releve: MutableLiveData<ReleveMeteo> = MutableLiveData<ReleveMeteo>().apply { value = ReleveMeteo() }
 
-     fun getMutableReleveMeteo() = releve
+    fun getMutableReleveMeteo() = releve
 
 
+    /**
+     * add a [ReleveMeteo] into [meteoList] and refresh [displayedList]
+     */
+    fun saveReleve() {
+        releve.value!!.let {
+            savedReleve ->  Log.i(ReleveDialog.TAG, "releve créé : ${savedReleve.toStringDisplayable()}")
+            MeteoFactory.addReleve(savedReleve)
+        }
+
+    }
 
 
 }
