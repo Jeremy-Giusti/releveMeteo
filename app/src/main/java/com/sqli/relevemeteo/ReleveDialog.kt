@@ -1,5 +1,6 @@
 package com.sqli.relevemeteo
 
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.text.Editable
@@ -19,10 +20,9 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
         val TAG = ReleveDialog::class.java.name
     }
 
-    /**
-     * the [ReleveMeteo] that we are creating/editing
-     */
-    var releve: ReleveMeteo = ReleveMeteo()
+
+
+
 
     /**
      * displayed list of [Ensoleillement]
@@ -35,6 +35,7 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var viewModel = ViewModelProvider.of(this).
         bindEditTexts()
         initSpinner()
         initConfirmButton()
@@ -55,7 +56,7 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
      * bind Edittexts for fields [ReleveMeteo.date], [ReleveMeteo.temperature], [ReleveMeteo.dateDeReleve]
      */
     private fun bindEditTexts() {
-        releve.run {
+        .run {
             releve_temperature.setText(temperature.asTemperatureString())
             releve_date.setText(dateDeReleve.asDisplayableString())
             meteo_date.setText(date.asDisplayableString())
