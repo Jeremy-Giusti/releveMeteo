@@ -8,6 +8,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 open class MainActivity : AppCompatActivity() {
 
+    private val meteoList = getMeteoList().apply { sortedBy { meteo -> meteo.date } }.toMutableList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,7 +18,6 @@ open class MainActivity : AppCompatActivity() {
     }
 
     private fun initMeteoList() {
-        val meteoList = getMeteoList()
 
         meteo_recycler_view.run {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -29,6 +30,11 @@ open class MainActivity : AppCompatActivity() {
             val ft = supportFragmentManager.beginTransaction()
             ReleveDialog().show(ft, ReleveDialog.TAG)
         }
+    }
+
+    fun addMeteoReleve(releve : ReleveMeteo){
+        meteoList.add(releve)
+        meteo_recycler_view.adapter?.notifyDataSetChanged()
     }
 
 }
