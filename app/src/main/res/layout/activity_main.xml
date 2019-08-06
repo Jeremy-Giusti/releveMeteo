@@ -9,10 +9,21 @@
     <EditText
             android:id="@+id/meteo_search"
             android:layout_margin="16dp"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/meteo_sort_spinner"/>
+
+    <Spinner
+            android:id="@+id/meteo_sort_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/meteo_search"
+            app:layout_constraintBottom_toBottomOf="@id/meteo_search"
+            app:layout_constraintStart_toEndOf="@id/meteo_search"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/meteo_recycler_view"

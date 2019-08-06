@@ -4,11 +4,23 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * concatenante "°C" at the end of an int
+ */
 fun Int.asTemperatureString() = "$this°C"
 
+/**
+ * use [DEFAULT_DATE_FORMAT] to transform a [Date] to a string
+ */
 fun Date.asDisplayableString() = android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, this)
 
 
+/**
+ * remove the last 2 characters and try to create an Int with the result
+ *
+ *
+ * see [Int.asTemperatureString] for the "reverse"
+ */
 fun String.toTemperatureInt(): Int? {
     return try {
         this.substring(IntRange(0, length - 3)).toInt()
@@ -17,6 +29,11 @@ fun String.toTemperatureInt(): Int? {
     }
 }
 
+/**
+ * reverse of [Date.asDisplayableString]
+ *
+ * use [DEFAULT_DATE_FORMAT] to format
+ */
 fun String.toDate(): Date? {
     return try {
         val format = SimpleDateFormat(DEFAULT_DATE_FORMAT)
@@ -26,11 +43,17 @@ fun String.toDate(): Date? {
     }
 }
 
+/**
+ * clean the List and addAll item passed as parameter
+ */
 fun <T> MutableList<T>.replace(list: List<T>) {
     this.clear()
     this.addAll(list)
 }
 
+/**
+ * same as [String.toInt] but with [NumberFormatException] handling
+ */
 fun String.toIntOrNull(): Int? {
     return try {
         toInt()
@@ -39,7 +62,14 @@ fun String.toIntOrNull(): Int? {
     }
 }
 
-
 fun List<Meteo>.sortMeteoListByDate(): List<Meteo> {
     return sortedWith(compareByDescending { it.date })
+}
+
+/**
+ * @param comparator comparator used to sort the list
+ * @return the list subject of this sort
+ */
+fun List<Meteo>.sortMeteoList(comparator: Comparator<Meteo>): List<Meteo> {
+    return sortedWith(comparator)
 }

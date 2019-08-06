@@ -14,12 +14,20 @@ import kotlinx.android.synthetic.main.releve_fragment.*
 
 
 class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
-    var releve: ReleveMeteo = ReleveMeteo()
-    val ensoleillementList = Ensoleillement.values().apply { sortBy { it.toString() } }
 
     companion object {
         val TAG = ReleveDialog::class.java.name
     }
+
+    /**
+     * the [ReleveMeteo] that we are creating/editing
+     */
+    var releve: ReleveMeteo = ReleveMeteo()
+
+    /**
+     * displayed list of [Ensoleillement]
+     */
+    val ensoleillementList = Ensoleillement.values().apply { sortBy { it.toString() } }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.releve_fragment, container, true)
@@ -27,26 +35,26 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initManualBinding()
+        bindEditTexts()
         initSpinner()
         initConfirmButton()
     }
 
+    /**
+     * [ReleveMeteo.ensoleillement] selection
+     */
     private fun initSpinner() {
         releve_ensoleillement.onItemSelectedListener = this
         val adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, ensoleillementList)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         releve_ensoleillement.adapter = adapter
     }
 
-    private fun initConfirmButton() {
-        validate_releve_button.setOnClickListener {
-            validateReleve()
-        }
-    }
-
-    private fun initManualBinding() {
+    /**
+     * bind Edittexts for fields [ReleveMeteo.date], [ReleveMeteo.temperature], [ReleveMeteo.dateDeReleve]
+     */
+    private fun bindEditTexts() {
         releve.run {
             releve_temperature.setText(temperature.asTemperatureString())
             releve_date.setText(dateDeReleve.asDisplayableString())
@@ -83,13 +91,24 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
+    /**
+     * on selection for [ReleveMeteo.ensoleillement]
+     */
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         releve.ensoleillement = ensoleillementList[position]
     }
 
+    private fun initConfirmButton() {
+        validate_releve_button.setOnClickListener {
+            validateReleve()
+        }
+    }
+
+    /**
+     * Save the edited [ReleveMeteo]
+     */
     private fun validateReleve() {
         Log.i(TAG, "releve créé : ${releve.toStringDisplayable()}")
-
         (activity as MainActivity).addMeteoReleve(releve)
         dismiss()
     }

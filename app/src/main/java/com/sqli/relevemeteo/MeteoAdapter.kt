@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.meteo_item.view.*
 
 class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Meteo) -> Unit) :
     RecyclerView.Adapter<MeteoAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.meteo_item, parent, false)
         return ViewHolder(itemView)
@@ -18,10 +19,7 @@ class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Me
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         meteoList[position].let { meteo -> holder.bind(meteo, itemClickCallback) }
-
-
     }
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(
