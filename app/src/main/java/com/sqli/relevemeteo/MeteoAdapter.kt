@@ -1,12 +1,15 @@
 package com.sqli.relevemeteo
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.meteo_item.view.*
 
-class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Meteo) -> Unit) :
+class MeteoAdapter(
+    var meteoList: List<Meteo>,
+    val itemLongClickCallback: (meteo: Meteo) -> Unit,
+    val itemClickCallback: (meteo: Meteo) -> Unit
+) :
     androidx.recyclerview.widget.RecyclerView.Adapter<MeteoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,21 +21,30 @@ class MeteoAdapter(var meteoList: List<Meteo>, val itemClickCallback: (meteo: Me
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        meteoList[position].let { meteo -> holder.bind(meteo, itemClickCallback) }
+        meteoList[position].let { meteo -> holder.bind(meteo, itemLongClickCallback, itemClickCallback) }
+    }
+
+    fun updateList(it: List<Meteo>) {
+        this.meteoList = it
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         fun bind(
             meteo: Meteo,
+            itemLongClickCallback: (meteo: Meteo) -> Unit,
             itemClickCallback: (meteo: Meteo) -> Unit
         ) {
             itemView.run {
                 meteo_date.text = "${meteo.temperature}°C"
                 meteo_temperature.text = "Date : ${meteo.date.asDisplayableString()}"
                 meteo_ensoleillement.text = meteo.ensoleillement.toString()
-                setOnLongClickListener{
-                    itemClickCallback(meteo)
+                setOnLongClickListener {
+                    itemLongClickCallback(meteo)
                     return@setOnLongClickListener true
+                }
+                setOnClickListener {
+                    itemClickCallback(meteo)
                 }
             }
         }

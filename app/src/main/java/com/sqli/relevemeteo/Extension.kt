@@ -12,7 +12,7 @@ fun Int.asTemperatureString() = "$this°C"
 /**
  * use [DEFAULT_DATE_FORMAT] to transform a [Date] to a string
  */
-fun Date.asDisplayableString() = android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, this)
+fun Date.asDisplayableString() = android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, this).toString()
 
 
 /**
@@ -72,4 +72,25 @@ fun List<Meteo>.sortMeteoListByDate(): List<Meteo> {
  */
 fun List<Meteo>.sortMeteoList(comparator: Comparator<Meteo>): List<Meteo> {
     return sortedWith(comparator)
+}
+
+/**
+ * Replace a value by [newValue]
+ *
+ * Chronologicaly does :
+ * 1. find the item from the list that match the lambda condition
+ * 2. add [newValue] next to the item found
+ * 3. remove the item found
+ *
+ * @param newValue the value that will replace the first value that match [findLambda]
+ * @param findLambda lambda used to find the value to replace
+ * @return true if an item has been replaced, false otherwise
+ */
+fun <T> MutableList<T>.replace(newValue: T, findLambda: (T) -> Boolean) : Boolean {
+    find { findLambda(it) }?.let {
+        val index = indexOf(it)
+        set(index, newValue)
+        return true
+    }
+    return false
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sqli.relevemeteo.viewModel.ListMeteoViewModel
+import com.sqli.relevemeteo.viewModel.ReleveEditionViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -35,16 +36,45 @@ open class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
      */
     private fun initMeteoList() {
         meteo_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
-        viewModel.mutableMeteoList.observe(this, Observer<List<Meteo>> {
-            meteo_recycler_view.adapter = MeteoAdapter(it, ::onMeteoClick)
-        })
+
+        //create adapter for recycler view
+        MeteoAdapter(
+            viewModel.mutableMeteoList.value!!,
+            ::onMeteoLongClick,
+            ::onMeteoClick
+        ).let { adapter ->
+            //set recycler view adapter
+            meteo_recycler_view.adapter = adapter
+
+            //refresh adapter when meteoList change
+            viewModel.mutableMeteoList.observe(this, Observer<List<Meteo>> {
+                adapter.updateList(it)
+            })
+        }
+
 
     }
 
     /**
+     * initialize button to create a new [ReleveMeteo] with [ReleveDialog]
+     */
+    private fun initAddReleveButton() {
+        fab_add_meteo.setOnClickListener {
+            showReleveEditionDialog()
+        }
+    }
+
+    fun onMeteoClick(meteo: Meteo) {
+        val releveViewModel = ViewModelProviders.of(this).get(ReleveEditionViewModel::class.java)
+        releveViewModel.setReleve(ReleveMeteo(meteo = meteo))
+        showReleveEditionDialog()
+    }
+
+
+    /**
      * Prompt a popup to confirm the removal of the selected [Meteo] from [meteo_recycler_view]
      */
-    fun onMeteoClick(meteo: Meteo) {
+    fun onMeteoLongClick(meteo: Meteo) {
         AlertDialog.Builder(this)
             .setMessage("Confirmer la suppression de la meteo")
             .setPositiveButton(android.R.string.ok) { dialog, _ ->
@@ -57,19 +87,13 @@ open class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             .show()
     }
 
-    /**
-     * initialize button to create a new [ReleveMeteo] with [ReleveDialog]
-     */
-    private fun initAddReleveButton() {
-        fab_add_meteo.setOnClickListener {
-            val ft = supportFragmentManager.beginTransaction()
-            val dialog = ReleveDialog()
-            dialog.setOnDismissListener {
-                viewModel.refreshListMeteo()
-            }
-            dialog.show(ft, ReleveDialog.TAG)
-
+    fun showReleveEditionDialog() {
+        val ft = supportFragmentManager.beginTransaction()
+        val dialog = ReleveDialog()
+        dialog.setOnDismissListener {
+            viewModel.refreshListMeteo()
         }
+        dialog.show(ft, ReleveDialog.TAG)
     }
 
 //region sort Spinner
