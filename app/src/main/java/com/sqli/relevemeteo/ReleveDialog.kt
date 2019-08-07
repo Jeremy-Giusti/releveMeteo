@@ -41,9 +41,9 @@ class ReleveDialog : DialogFragment(), AdapterView.OnItemSelectedListener {
             true
         )
         viewModel = ViewModelProviders.of(activity!!).get(ReleveEditionViewModel::class.java)
-        binding.releveViewModel = viewModel
         /** allow livedata binding */
         binding.lifecycleOwner = this
+        binding.releveViewModel = viewModel
         return binding.root
     }
 

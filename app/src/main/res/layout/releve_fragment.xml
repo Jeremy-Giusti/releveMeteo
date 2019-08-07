@@ -23,7 +23,7 @@
                 android:id="@+id/releve_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{releveViewModel.releveDateLiveData}"
+                android:text="@={releveViewModel.releveDateLiveData}"
                 tools:text="05/07/19"/>
         <TextView
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         <EditText
                 android:id="@+id/releve_temperature"
                 android:layout_width="match_parent"
-                android:text="@{releveViewModel.temperatureLiveData}"
+                android:text="@={releveViewModel.temperatureLiveData}"
                 android:layout_height="wrap_content"
                 tools:text="31°C"/>
         <Spinner
@@ -50,7 +50,7 @@
         <EditText
                 android:id="@+id/meteo_date"
                 android:layout_width="match_parent"
-                android:text="@{releveViewModel.meteoDateLiveData}"
+                android:text="@={releveViewModel.meteoDateLiveData}"
                 android:layout_height="wrap_content"
                 tools:text="05/07/19"/>
 
