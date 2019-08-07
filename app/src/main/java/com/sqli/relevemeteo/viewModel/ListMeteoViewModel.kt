@@ -6,6 +6,7 @@ import com.sqli.relevemeteo.*
 import kotlin.text.toIntOrNull
 
 class ListMeteoViewModel : ViewModel() {
+
     /**
      * store the full meteo list, used to add or remove items
      *
@@ -17,12 +18,17 @@ class ListMeteoViewModel : ViewModel() {
 
     var selectedMeteoSortSubject = MeteoField.DATE
 
+    /**
+     * a sorted/filtered observable list
+     */
+    val mutableMeteoList = MutableLiveData<List<Meteo>>().apply { value = meteoFullList }
+
+
     fun refreshListMeteo() {
         meteoFullList = MeteoFactory.getMeteoList().toList()
         updateMeteoList()
     }
 
-    val mutableMeteoList = MutableLiveData<List<Meteo>>().apply { value = meteoFullList }
 
     fun changeFilter(filter: String) {
         selectedMeteoFilter = filter
@@ -34,6 +40,9 @@ class ListMeteoViewModel : ViewModel() {
         updateMeteoList()
     }
 
+    /**
+     * use  [meteoFullList] with [selectedMeteoSortSubject] and [selectedMeteoFilter] to update [mutableMeteoList]
+     */
     private fun updateMeteoList() {
         //Filtrage
         var listMeteoTemp = if (selectedMeteoFilter.isBlank()) {

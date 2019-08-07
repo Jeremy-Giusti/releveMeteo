@@ -19,13 +19,10 @@ object MeteoFactory {
 
     fun addOrUpdate(releveMeteo: ReleveMeteo) {
         val hasReplacedMeteo = meteoList.replace(releveMeteo){meteo -> meteo.id == releveMeteo.id }
+
         if(!hasReplacedMeteo){
             meteoList.add(releveMeteo)
         }
-    }
-
-    fun updateList(updatedList: List<Meteo>) {
-        meteoList.replace(updatedList)
     }
 
     fun removeMeteoReleve(meteo : Meteo)
@@ -33,6 +30,6 @@ object MeteoFactory {
         meteoList.remove(meteo)
     }
 
-    fun getMeteoList() = meteoList
+    fun getMeteoList() = meteoList.toMutableList()
 
 }

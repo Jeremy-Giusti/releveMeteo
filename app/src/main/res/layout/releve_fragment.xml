@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/releve_dialog_root_view"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:padding="64dp"
-              android:layout_height="match_parent">
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/releve_date"/>
-    <EditText
-            android:id="@+id/releve_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="05/07/19"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/temperature"/>
 
-    <EditText
-            android:id="@+id/releve_temperature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="31°C"/>
-    <Spinner
-            android:id="@+id/releve_ensoleillement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"/>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="releveViewModel"
+                  type="com.sqli.relevemeteo.viewModel.ReleveEditionViewModel"/>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/meteo_date"/>
-    <EditText
-            android:id="@+id/meteo_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="05/07/19"/>
+    </data>
 
-    <Button
-            android:id="@+id/validate_releve_button"
+    <LinearLayout
+            android:id="@+id/releve_dialog_root_view"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/validate"
-    />
+            android:padding="64dp"
+            android:layout_height="match_parent">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/releve_date"/>
+        <EditText
+                android:id="@+id/releve_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{releveViewModel.releveDateLiveData}"
+                tools:text="05/07/19"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/temperature"/>
 
-</LinearLayout>
+        <EditText
+                android:id="@+id/releve_temperature"
+                android:layout_width="match_parent"
+                android:text="@{releveViewModel.temperatureLiveData}"
+                android:layout_height="wrap_content"
+                tools:text="31°C"/>
+        <Spinner
+                android:id="@+id/releve_ensoleillement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/meteo_date"/>
+        <EditText
+                android:id="@+id/meteo_date"
+                android:layout_width="match_parent"
+                android:text="@{releveViewModel.meteoDateLiveData}"
+                android:layout_height="wrap_content"
+                tools:text="05/07/19"/>
+
+        <Button
+                android:id="@+id/validate_releve_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/validate"
+        />
+
+    </LinearLayout>
+</layout>

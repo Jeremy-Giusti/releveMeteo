@@ -24,6 +24,11 @@ class MeteoAdapter(
         meteoList[position].let { meteo -> holder.bind(meteo, itemLongClickCallback, itemClickCallback) }
     }
 
+    fun updateList(it: List<Meteo>) {
+        this.meteoList = it
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         fun bind(
             meteo: Meteo,

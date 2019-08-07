@@ -36,9 +36,22 @@ open class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
      */
     private fun initMeteoList() {
         meteo_recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
-        viewModel.mutableMeteoList.observe(this, Observer<List<Meteo>> {
-            meteo_recycler_view.adapter = MeteoAdapter(it, ::onMeteoLongClick,::onMeteoClick)
-        })
+
+        //create adapter for recycler view
+        MeteoAdapter(
+            viewModel.mutableMeteoList.value!!,
+            ::onMeteoLongClick,
+            ::onMeteoClick
+        ).let { adapter ->
+            //set recycler view adapter
+            meteo_recycler_view.adapter = adapter
+
+            //refresh adapter when meteoList change
+            viewModel.mutableMeteoList.observe(this, Observer<List<Meteo>> {
+                adapter.updateList(it)
+            })
+        }
+
 
     }
 
@@ -58,7 +71,7 @@ open class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     }
 
 
-        /**
+    /**
      * Prompt a popup to confirm the removal of the selected [Meteo] from [meteo_recycler_view]
      */
     fun onMeteoLongClick(meteo: Meteo) {
@@ -74,8 +87,7 @@ open class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             .show()
     }
 
-    fun showReleveEditionDialog()
-    {
+    fun showReleveEditionDialog() {
         val ft = supportFragmentManager.beginTransaction()
         val dialog = ReleveDialog()
         dialog.setOnDismissListener {

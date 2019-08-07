@@ -12,7 +12,7 @@ fun Int.asTemperatureString() = "$this°C"
 /**
  * use [DEFAULT_DATE_FORMAT] to transform a [Date] to a string
  */
-fun Date.asDisplayableString() = android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, this)
+fun Date.asDisplayableString() = android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, this).toString()
 
 
 /**
@@ -89,8 +89,7 @@ fun List<Meteo>.sortMeteoList(comparator: Comparator<Meteo>): List<Meteo> {
 fun <T> MutableList<T>.replace(newValue: T, findLambda: (T) -> Boolean) : Boolean {
     find { findLambda(it) }?.let {
         val index = indexOf(it)
-        add(index, newValue)
-        remove(it)
+        set(index, newValue)
         return true
     }
     return false
