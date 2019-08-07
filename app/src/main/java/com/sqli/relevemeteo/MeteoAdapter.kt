@@ -3,6 +3,7 @@ package com.sqli.relevemeteo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.meteo_item.view.*
 
 class MeteoAdapter(
@@ -36,9 +37,15 @@ class MeteoAdapter(
             itemClickCallback: (meteo: Meteo) -> Unit
         ) {
             itemView.run {
-                meteo_date.text = "${meteo.temperature}°C"
-                meteo_temperature.text = "Date : ${meteo.date.asDisplayableString()}"
-                meteo_ensoleillement.text = meteo.ensoleillement.toString()
+                meteo_temperature.text = "${meteo.temperature}°C"
+                meteo_date.text = "Date : ${meteo.date.asDisplayableString()}"
+                meteo_ensoleillement.setImageResource(getDrawableForEnsoleillement(meteo.ensoleillement))
+                meteo_ensoleillement.setColorFilter(
+                    ContextCompat.getColor(
+                        context,
+                        getTintForEnsoleillement(meteo.ensoleillement)
+                    )
+                )
                 setOnLongClickListener {
                     itemLongClickCallback(meteo)
                     return@setOnLongClickListener true

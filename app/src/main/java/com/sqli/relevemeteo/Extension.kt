@@ -1,5 +1,9 @@
 package com.sqli.relevemeteo
 
+import android.content.res.ColorStateList
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -86,7 +90,7 @@ fun List<Meteo>.sortMeteoList(comparator: Comparator<Meteo>): List<Meteo> {
  * @param findLambda lambda used to find the value to replace
  * @return true if an item has been replaced, false otherwise
  */
-fun <T> MutableList<T>.replace(newValue: T, findLambda: (T) -> Boolean) : Boolean {
+fun <T> MutableList<T>.replace(newValue: T, findLambda: (T) -> Boolean): Boolean {
     find { findLambda(it) }?.let {
         val index = indexOf(it)
         set(index, newValue)

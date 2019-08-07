@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="blue_sky">#4bc1fc</color>
+    <color name="yellow_sunny">#ffff00</color>
+    <color name="white_cloud">#ffffff</color>
+    <color name="grey_fog">#aaaaaa</color>
+    <color name="blue_orage">#24277c</color>
+    <color name="blue_rainy">#0008ff</color>
+
+
 </resources>
