@@ -3,7 +3,7 @@ package com.sqli.relevemeteo
 import java.util.*
 
 /**
- * Data class to store a meteo with a releve date
+ * class to store a meteo with a releve date
  */
 class ReleveMeteo(
     var dateDeReleve: Date = Date(),
@@ -15,3 +15,5 @@ class ReleveMeteo(
     date,
     weatherType
 )
+
+//TODO here we can find a few informations on how Meteo should be implemented

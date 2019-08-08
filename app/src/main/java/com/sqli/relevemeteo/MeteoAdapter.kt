@@ -55,16 +55,10 @@ private fun getDrawableForEnsoleillement(ensoleillement: WeatherType): Int {
 }
 
 /**
- * concatenante "°C" at the end of an int
- */
-fun IntToTemperatureString(myInt : Int) :String {
-    return "$myInt°C"
-}
-
-/**
  * use [DEFAULT_DATE_FORMAT] to transform a [Date] to a string
  */
 fun dateToDisplayableString(date:Date):String {
+    //TODO here see that the DEFAULT_DATE_FORMAT constant is needed from Meteo file
     return android.text.format.DateFormat.format(DEFAULT_DATE_FORMAT, date).toString()
 }
 

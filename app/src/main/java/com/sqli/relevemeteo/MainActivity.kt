@@ -21,6 +21,7 @@ open class MainActivity : AppCompatActivity(){
      * list of meteo we want to display
      */
     private val meteoList = ArrayList<Meteo>().apply {
+        //TODO Here we see how meteo should be instantiated
         add(Meteo(31, Date(), WeatherType.SOLEIL))
         add(Meteo(21, Date(1546764811000), WeatherType.PLUIT))
         add(Meteo(3, Date(1544086411000), WeatherType.SOLEIL))
